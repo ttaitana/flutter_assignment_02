@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import '../model/storage.dart';
 
-class newSubject extends StatelessWidget {
+class newSubject extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return newSubjectState();
+  }
+  
+}
+
+class newSubjectState extends State<newSubject> {
+  final StorageProvider _storage = StorageProvider();
   final _formkey = GlobalKey<FormState>();
+
+  TextEditingController titleCtrl =TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    _storage.open('todo.db');
     return Scaffold(
         appBar: AppBar(
           title: Text('New Subject'),
@@ -17,6 +32,7 @@ class newSubject extends StatelessWidget {
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(hintText: 'Subject'),
+                  controller: titleCtrl,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please fill subject';
@@ -25,8 +41,15 @@ class newSubject extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text('Save'),
-                  onPressed: () {
+                  onPressed: () async{
                     if (_formkey.currentState.validate()) {
+                      Storage data =Storage();
+                      data.title = titleCtrl.text;
+                      data.done = false;
+                      print('Wait');
+                      _storage.insert(data);
+                      print('Completed');
+                      // _storage.close();
                       Navigator.pop(context);
                     }
                   },
