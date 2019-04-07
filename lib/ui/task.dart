@@ -31,19 +31,15 @@ class TaskState extends State<Task> {
         )));
     // cbs.add(CheckboxListTile(title: Text('Test'),value: false,));
     if (cbs.isEmpty) {
-      print('*********************************************************************************');
+      print(
+          '*********************************************************************************');
       print(cbs.length);
       return [Text("No data found..")];
     }
     return cbs;
   }
 
-  @override
-  initState() {
-    super.initState();
-    updateTask();
-    _storage.open('todo.db');
-  }
+  
 
   Widget build(BuildContext context) {
     // TODO: implement build

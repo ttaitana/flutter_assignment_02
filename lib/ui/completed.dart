@@ -12,7 +12,10 @@ class Completed extends StatefulWidget{
 
 class CompletedState extends State<Completed>{
   final StorageProvider _storage = StorageProvider();
+  List<Storage> _task = List<Storage>();
   List<Storage> _completed = List<Storage>();
+
+  // ------------ Function ------------------
   void updateComplete() {
     this._storage.getComplete().then((lst) {
       setState(() {
@@ -20,6 +23,16 @@ class CompletedState extends State<Completed>{
       });
     });
   }
+
+  void updateTask() {
+    this._storage.getTask().then((lst) {
+      setState(() {
+        this._task = lst;
+      });
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

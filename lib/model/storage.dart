@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 final String tableTodo = 'todo';
@@ -40,7 +39,7 @@ class StorageProvider {
         onCreate: (Database db, int version) async {
       await db.execute('''
         create table $tableTodo(
-          $columnId interger primary key autoincrement,
+          $columnId integer primary key autoincrement,
           $columnTitle text not null,
           $columnDone integer not null
         )
@@ -89,8 +88,8 @@ class StorageProvider {
   Future delComplete() async{
     await this.db.delete(
       tableTodo,
-      where: '$columnDone = 1'
-    )
+      where: '$columnDone = 1',
+    );
   }
 
   Future close() async => db.close();

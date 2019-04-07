@@ -7,19 +7,24 @@ class newSubject extends StatefulWidget {
     // TODO: implement createState
     return newSubjectState();
   }
-  
 }
 
 class newSubjectState extends State<newSubject> {
   final StorageProvider _storage = StorageProvider();
   final _formkey = GlobalKey<FormState>();
 
-  TextEditingController titleCtrl =TextEditingController();
+  TextEditingController titleCtrl = TextEditingController();
 
-  
+  @override
+  initState() {
+    super.initState();
+    _storage.open('todo.db');
+    print('######################################');
+    print('initNew');
+  }
+
   @override
   Widget build(BuildContext context) {
-    _storage.open('todo.db');
     return Scaffold(
         appBar: AppBar(
           title: Text('New Subject'),
@@ -41,13 +46,18 @@ class newSubjectState extends State<newSubject> {
                 ),
                 RaisedButton(
                   child: Text('Save'),
-                  onPressed: () async{
+                  onPressed: () async {
                     if (_formkey.currentState.validate()) {
-                      Storage data =Storage();
+                      Storage data = Storage();
                       data.title = titleCtrl.text;
                       data.done = false;
                       print('Wait');
-                      _storage.insert(data);
+                      // await _storage.insert(data);
+                      Storage result = await _storage.insert(data);
+                      print('######################################');
+                      print(result.id);
+                      print(result.title);
+                      print(result.done);
                       print('Completed');
                       // _storage.close();
                       Navigator.pop(context);
