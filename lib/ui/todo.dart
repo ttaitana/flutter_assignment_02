@@ -43,6 +43,7 @@ class toDoState extends State<toDoPage> {
     // Variable
     Widget checkBoxsTask() {
       List<Widget> cbs = List();
+      int counter = 1;
       for (var item in _task) {
         cbs.add(CheckboxListTile(
           title: Text(item.title),
@@ -55,6 +56,12 @@ class toDoState extends State<toDoPage> {
             });
           },
         ));
+        if(counter < _task.length){
+          cbs.add(
+            Divider(color: Colors.black,)
+          );
+        }
+        counter++;
       }
       // _task.map((f) => cbs.add(CheckboxListTile(
       //       title: Text(f.title),
@@ -69,10 +76,16 @@ class toDoState extends State<toDoPage> {
       return ListView(
         children: cbs,
       );
+
+      // return ListView.separated(
+      //   itemCount: cbs.length,
+      //   itemBuilder: ,
+      // );
     }
 
     Widget checkBoxsComplete() {
       List<Widget> cbs = List();
+      int counter = 1;
       for (var item in _completed) {
         cbs.add(CheckboxListTile(
           title: Text(item.title),
@@ -85,6 +98,11 @@ class toDoState extends State<toDoPage> {
             });
           },
         ));
+        if(counter < _completed.length){
+          cbs.add(
+            Divider(color: Colors.black,)
+          );
+        }
       }
       // cbs.add(CheckboxListTile(title: Text('Test'),value: false,));
       if (cbs.isEmpty) {
@@ -166,10 +184,10 @@ class toDoState extends State<toDoPage> {
       body: _pages[_currentIndex],
       bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
-            canvasColor: Colors.blue,
-            primaryColor: Colors.white,
+            canvasColor: Colors.white,
+            primaryColor: Colors.blue,
             textTheme: Theme.of(context).textTheme.copyWith(
-                caption: TextStyle(color: Color.fromRGBO(255, 255, 255, .5))),
+                caption: TextStyle(color: Colors.black54)),
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

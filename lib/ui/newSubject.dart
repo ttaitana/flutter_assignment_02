@@ -54,10 +54,10 @@ class newSubjectState extends State<newSubject> {
                       print('Wait');
                       // await _storage.insert(data);
                       Storage result = await _storage.insert(data);
-                      print('######################################');
-                      print(result.id);
-                      print(result.title);
-                      print(result.done);
+                      // print('######################################');
+                      // print(result.id);
+                      // print(result.title);
+                      // print(result.done);
                       print('Completed');
                       // _storage.close();
                       Navigator.pop(context);
